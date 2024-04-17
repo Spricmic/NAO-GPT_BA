@@ -1,5 +1,6 @@
 import rclpy
 from std_msgs.msg import String
+from gpt_interface import GPT_Interface
 
 class GptPublisher:
     def __init__(self):
@@ -10,6 +11,7 @@ class GptPublisher:
         self.text_publisher = self.node.create_publisher(String, '/gpt_response', 10)
         #create subscriber node
         self.subscription = self.create_subscription(String, '/ask_gpt', self.question_callback, 10)
+        self.gpt = GPT_Interface()  # create GPT_Interface instance
         self.get_logger().info("ros_gpt node initalized succesfully.")
         
 
@@ -26,17 +28,17 @@ class GptPublisher:
     def question_callback(self, msg):
         question = msg.data
         self.get_logger().info(f"ros_gpt_Node: Recived the following msg on /ask_gpt: {question}")
+        response = self.gpt.ask_gpt(question)
+        self.get_logger().info(f"ros_gpt_Node: The model responded with: {response}")
+
+        #publish the msg to the /gpt_response topic
+        self.publish_once(response)
 
 
 
 def main(args=None):  # initial function for testing
     rclpy.init()
     publisher_node = GptPublisher()  # create the publisher class an populate the text
-    
-    publisher_node.publish_once('blabla', 'pose1')  # publish both text once and destroy the node again.
-
-    publisher_node.publish_once('blabla', 'pose1')  # publish both text once and destroy the node again.
-
 
     rclpy.spin(publisher_node.node)
 
