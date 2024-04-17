@@ -1,0 +1,57 @@
+[
+    {
+        "pose_name": "chin_scratch",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "HeadYaw", "HeadPitch"],
+        "angles": [0.286234, -0.2687807, -0.5253441, -1.502728, -1.82379, -0.312439, 0.2216568]
+    },
+    {
+        "pose_name": "reset_pose",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "HeadYaw", "HeadPitch"],
+        "angles": [1.57, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+    {
+        "pose_name": "head_scratch",
+        "parts": ["RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand", "HeadYaw", "HeadPitch", "LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll"],
+        "angles": [-0.6649704, -0.1204277, 0.7504916, 1.455605, 0.9424778, 0.01745329, 0.0, 0.0, 1.382301, 0.05061455, -0.9075712, -0.6789331]
+    },
+    {
+        "pose_name": "angry_fist_raise",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.279326, 0.11, -0.551524, -0.6387905, 0.7836528, 0.0, 0.0, 0.434587, 0.2844887, 1.197296, 1.059415, 1.931027, 0.0]
+    },
+    {
+        "pose_name": "cross_arms",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.555088, 0.2391101, -0.1815142, -0.3193953, -1.652827, 0.008726646, 0.0, 0.0, 0.6649704, 0.3124139, 0.5934119, 1.146681, 0.108214, 0.008726646]
+    },
+    {
+        "pose_name": "disappointed",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand", "LHipYawPitch", "LHipRoll", "LHipPitch", "LKneePitch", "LAnklePitch", "LAnkleRoll", "RHipYawPitch", "RHipRoll", "RHipPitch", "RKneePitch", "RAnklePitch", "RAnkleRoll"],
+        "angles": [1.240929, 0.1169371, -0.2426008, -0.4415683, -1.663299, 0.0, 0.0, -0.67, 1.298525, -0.1169371, 0.4951828, 0.4852015, 1.34914, 0.008726646, -0.4363323, -0.008726646, 0.158825, -0.06981317, -0.005235988, -0.05235988, -0.4363323, -0.1186824, 0.1291544, -0.09250245, 0.0754916, 0.1169371]
+    },
+    {
+        "pose_name": "fist_bump",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.279326, 0.1099557, -0.551524, -0.6387905, 0.7836528, 0.008726646, 0.0, 0.0, -0.1186824, 0.03665191, -0.5131268, 0.04537856, 0.4485496, 0.008726646]
+    },
+    {
+        "pose_name": "hands_behinde_back",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.9059, -0.01919862, 0.3141593, -0.9983283, -1.206023, 0.008726646, 0.0, 0.0, 1.045452, -0.01919862, -0.1204277, 0.8220501, 1.626647, 0.008726646]
+    },
+    {
+        "pose_name": "fist_bump",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.53938, 0.0424778, -0.2216568, -0.03490659, 0.158825, 0.008726646, 0.0, 0.0, 1.045452, -0.01919862, -0.1204277, 0.8220501, 1.626647, 0.008726646]
+    },
+    {
+        "pose_name": "fingers_linked",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [1.53938, 0.09424778, -0.2216568, -0.03490659, 0.158825, 0.008726646, 0.0, 0.0, 0.6649704, 0.3124139, 0.05934119, 1.146681, 0.1082104, 0.008726646]
+    },
+    {
+        "pose_name": "winner_pose",
+        "parts": ["LShoulderPitch", "LShoulderRoll", "LElbowYaw", "LElbowRoll", "LWristYaw", "LHand", "HeadYaw", "HeadPitch", "RShoulderPitch", "RShoulderRoll", "RElbowYaw", "RElbowRoll", "RWristYaw", "RHand"],
+        "angles": [-1.48353, 0.7033677, -0.551524, -0.6265732, -1.021018, 0.01745329, -0.1989675, -0.6719518, 0.434587, 0.2844887, 1.197296, 1.059415, 1.391027, 0.01745329]
+    }
+]

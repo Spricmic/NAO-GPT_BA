@@ -1,0 +1,7 @@
+naoqi_bridge_msgs/
+naoqi_driver2/
+naoqi_libqi/
+naoqi_libqicore/
+nao_meshes/
+pepper_meshes/
+.env

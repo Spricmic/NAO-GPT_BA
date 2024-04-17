@@ -1,0 +1,54 @@
+[
+    {
+        "name": "angry_fist_raise",
+        "description": "angrily raising one fist to show irritation / aggressivnes"
+    },
+    {
+        "name": "cross_arms",
+        "description": "Crossing arms to express a guarded stance or skepticism."
+    },
+    {
+        "name": "disappointed",
+        "description": "leaving the shoulders and head hanging to show disappointment or exhaustednes"
+    },
+    {
+        "name": "fist_bump",
+        "description": "extending arm with hand as fist. expecting a fist bump in euphoria"
+    },
+    {
+        "name": "hands_behinde_back",
+        "description": "Tucking both hands behind the back to signal alertness or general openness"
+    },
+    {
+        "name": "head_scratch",
+        "description": "Scratching your own head to express thinking or confusion"
+    },
+    {
+        "name": "lean_forward",
+        "description": "With torso leaning forward in order to show interest."
+    },
+    {
+        "name": "link_fingers",
+        "description": "linking fingers in front of the torso to display patience."
+    },
+    {
+        "name": "salut",
+        "description": "Putting hand to head for a salut. expressing respect or that something was understood"
+    },
+    {
+        "name": "winner_pose",
+        "description": "throwing both hands in the air and putting head back. This pose can display great euphoria or anger"
+    },
+    {
+        "name": "tilting_head",
+        "description": "Tilting head slightly to one side to convey curiosity or confusion."
+    },
+    {
+        "name": "hand_on_hip",
+        "description": "Placing one hand on the hip to convey confidence or authority."
+    },
+    {
+        "name": "palms_together",
+        "description": "Bringing palms together in front of the body to express gratitude or pleading."
+    }
+]
