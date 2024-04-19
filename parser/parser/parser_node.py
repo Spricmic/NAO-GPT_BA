@@ -1,14 +1,14 @@
 import rclpy
 from std_msgs.msg import String
 from rclpy.node import Node
-from naoqi_bridge_msgs.msg import JointAnglesWithSpeed
 import re
 
 class ParserNode(Node):
     def __init__(self):
         super().__init__('parser_node')
         self.get_logger().info("starting parser node.")
-        self.subscription = self.create_subscription(String, '/gpt_response', self.response_callback, 10)
+        #create publisher and subcriber
+        self.gpt_subscription = self.create_subscription(String, '/gpt_response', self.response_callback, 10)
         self.pose_publisher = self.create_publisher(String, '/pose', 10)
         self.speech_publisher = self.create_publisher(String, '/speech', 10)
         self.get_logger().info("parser node initalized succesfully.")
@@ -44,6 +44,8 @@ def main(args=None):
     rclpy.init(args=args)
     parser_node = ParserNode()
     rclpy.spin(parser_node)
+
+    #cleanup
     parser_node.destroy_node()
     rclpy.shutdown()
 

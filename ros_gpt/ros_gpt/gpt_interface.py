@@ -13,21 +13,28 @@ class GPT_Interface:
         self.DEPLOYMENT_NAME = "NAO4"
         self.WORDS_TO_TOKENS_MULTIPLIER = 1.3
         self.conversation_context = []
+        self.pose_description = None
+        self.prompt = None
 
         load_dotenv()  # loading variables from .env file
 
         # Client for OpenAI API
-        self.client = AzureOpenAI(api_key=os.getenv("AZURE_OPENAI_KEY"),
+        self.client = AzureOpenAI(api_key=os.environ["AZURE_OPENAI_KEY"],
                                   api_version="2024-02-01",
-                                  azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"))
+                                  azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"])
 
         # Load pose descriptions
-        with open('pose_description.json') as jsonfile:
-            self.pose_description = json.load(jsonfile)
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+        poses_file_path = os.path.join(script_dir, 'pose_description.json')
+        with open(poses_file_path) as pose_file:
+            self.pose_description = json.load(pose_file)
+        
 
         # Load prompt text
-        with open('job_description.txt') as prompttext:
-            self.prompt = prompttext.read()
+        description_dir = os.path.dirname(os.path.realpath(__file__))
+        description_file_path = os.path.join(description_dir, 'job_description.txt')
+        with open(description_file_path) as job_description_txt:
+            self.prompt =  job_description_txt.read()
 
         # Merge prompt text and poses into a single prompt
         self.job_description = self.prompt + json.dumps(self.pose_description)  # TODO check if an empty .json file would work.
