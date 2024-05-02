@@ -1,6 +1,8 @@
 import webrtcvad as vad
-import speech_recognition as sr
+import azure.cognitiveservices.speech as speechsdk
+import time
 from dotenv import load_dotenv
+
 
 class SttAzureInterface:
     """

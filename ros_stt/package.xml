@@ -9,8 +9,11 @@
 
   <exec_depend>rclpy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+  <exec_depend>naoqi_bridge_msgs</exec_depend>
   <exec_depend>webrtcvad</exec_depend>
   <exec_depend>time</exec_depend>
+  <exec_depend>stt_azure_interface</exec_depend>
+  <exec_depend>stt_presampler</exec_depend>
 
 
   <test_depend>ament_copyright</test_depend>

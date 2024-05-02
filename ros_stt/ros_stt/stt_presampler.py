@@ -2,6 +2,7 @@ import webrtcvad
 import time
 import os
 import wave
+import speech_recognition as sr
 
 
 class SttPresampler:
