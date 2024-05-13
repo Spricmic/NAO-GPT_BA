@@ -21,6 +21,11 @@ class SttAzureInterface:
                                                     region=self.speechsdk_region)
         
     def delete_wav_file(self, wav_file):
+        """
+        deletes a file
+
+        :param wav_file: path to the file that should be deleted.
+        """
         os.remove(wav_file)
 
         
