@@ -20,6 +20,10 @@ class SttAzureInterface:
         self.speech_config = speechsdk.SpeechConfig(subscription=self.speechsdk_key,
                                                     region=self.speechsdk_region)
         
+    def delete_wav_file(self, wav_file):
+        os.remove(wav_file)
+
+        
     def evaluate_wav(self, wav_file):
         """
         Sends the call to the API which interacts with the Azure speechservices. Returns the transcribed audio as string.
@@ -46,6 +50,8 @@ class SttAzureInterface:
             print("Error details: {}".format(cancellation_details.error_details))
             print("Did you set the speech resource key and region values?")
             return None
+        
+        self.delete_wav_file(wav_file)
 
 def main():
     # this section is only for testing purposes. The call to this class needs to be made from ros_stt.py
