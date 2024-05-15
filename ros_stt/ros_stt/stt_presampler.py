@@ -10,7 +10,8 @@ class SttPresampler:
     This class is to presample the /audio topic from NAO
     It filters audio samples in which people are speaking and not. 
     At the end it outputs a single .wav file in which the spoken promt to NAO is contained.
-    This can then furter besent to a speak-to-text node which processes the file to text.
+    It also downsamples the /audiotopic to be accepted by the speak-to-text modul.
+    This can then further be sent to a speak-to-text node which processes the file to text.
     """
     def __init__(self):
         self.FRAME_DURATION_MS = 30  # duration of one sample passed to VAD to determain if somebody is speaking. 
