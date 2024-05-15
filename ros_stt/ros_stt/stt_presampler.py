@@ -2,7 +2,6 @@ import webrtcvad
 import time
 import os
 import wave
-import speech_recognition as sr
 
 
 class SttPresampler:
@@ -16,13 +15,13 @@ class SttPresampler:
     def __init__(self):
         self.FRAME_DURATION_MS = 30  # duration of one sample passed to VAD to determain if somebody is speaking. 
         self.SAMPLE_RATE = 16000  # rate at which the sudio is sampled.
-        self.SAMPLE_WITH = 2  # 
+        self.SAMPLE_WITH = 2  #  
         self.CHANNELS = 1  # number of channels from where audio is streamed.
         self.CHUNK_SIZE = int(self.SAMPLE_RATE * self.FRAME_DURATION_MS / 1000) * self.SAMPLE_WITH
         self.SILENCE_DURATION = 1
-        self.audio_buffer = []  # buffer used to by VAD to determain if it is spooken
+        self.audio_buffer = []  # buffer used to by VAD to determain if somebody is speaking
         self.DELEAT_OLD_WAV = True
-        self.wav_file = []  # all audio gets saved here unitl it is determaind.
+        self.wav_file = []  # all audio gets saved here unitl it is terminated.
         self.vad = webrtcvad.Vad(1)
 
 
@@ -38,4 +37,10 @@ class SttPresampler:
         self.wav_file = []
 
 
-    
+def main():
+    # this section is only for testing purposes. The call to this class needs to be made from ros_stt.py
+    pass
+
+
+if __name__ == "__main__":
+    main()

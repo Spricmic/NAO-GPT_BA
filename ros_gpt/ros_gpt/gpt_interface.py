@@ -97,6 +97,7 @@ class GPT_Interface:
     
 
 def main():
+    # This sectino is only for testing and debugging purposes.
     gpt = GPT_Interface()
 
     while True:
