@@ -11,9 +11,9 @@ class SttPublisherNode(Node):
         self.get_logger().info("starting stt node.")
         # create publisher and subscriber nodes
         self.audio_subscription = self.create_subscription(AudioBuffer, '/audio', self.audio_callback, 10)
-        self.text_publisher = self.create_publisher(String, '/ask_gpt', 10)
+        self.text_publisher = self.create_publisher(String, '/prompt_gpt', 10)
         #self.stt_presampler = SttPresampler  # create a presampler instance.
-        #self.stt_modul = SttAzureInterface  # creat a STT Interface instance.
+        self.stt_modul = SttAzureInterface()  # creat a STT Interface instance.
         self.get_logger().info("stt node initalized succesfully.")
         
 
@@ -29,7 +29,7 @@ class SttPublisherNode(Node):
 
     def audio_callback(self, msg):
         audio_sample = msg.data
-        self.get_logger().info(audio_sample)
+        self.get_logger().info(f"{audio_sample}")
 
 
 

@@ -1,6 +1,4 @@
-import webrtcvad as vad
 import azure.cognitiveservices.speech as speechsdk
-import time
 import os
 from dotenv import load_dotenv
 

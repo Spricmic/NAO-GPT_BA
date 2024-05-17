@@ -8,7 +8,7 @@ class GptPublisherNode(Node):
         super().__init__('gpt_node')
         self.get_logger().info("starting gpt node.")
         # create publisher and subscriber nodes
-        self.stt_subscription = self.create_subscription(String, '/ask_gpt', self.question_callback, 10)
+        self.stt_subscription = self.create_subscription(String, '/prompt_gpt', self.question_callback, 10)
         self.text_publisher = self.create_publisher(String, '/gpt_response', 10)
         self.gpt = GPT_Interface()  # create GPT_Interface instance
         self.get_logger().info("gpt node initalized succesfully.")
