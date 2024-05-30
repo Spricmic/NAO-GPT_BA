@@ -1,7 +1,6 @@
 import rclpy
 import os
 import time
-from threading import Timer, Thread
 from std_msgs.msg import String
 from naoqi_bridge_msgs.msg import AudioBuffer
 from rclpy.node import Node
@@ -15,9 +14,9 @@ class SttPublisherNode(Node):
         # create publisher and subscriber nodes
         self.audio_subscription = self.create_subscription(AudioBuffer, '/audio', self.audio_callback, 10)
         self.text_publisher = self.create_publisher(String, '/prompt_gpt', 10)
-        self.stt_presampler = SttPresampler()  # create a presampler instance.
+        self.stt_presampler = SttPresampler()  # create a STT presampler instance.
         self.stt_modul = SttAzureInterface()  # creat a STT Interface instance.
-        self.recording_time = 5  # debugging time to record a .wav file
+        self.last_speech_time = None  # saves the time when the last spooken utterance was detected.
         self.start_time = time.time()
         self.wav_was_saved = False
         self.get_logger().info("stt node initalized succesfully.")
@@ -35,10 +34,11 @@ class SttPublisherNode(Node):
 
     def audio_callback(self, msg):
         try:
-            if (time.time() - self.start_time) <= 5:
+            if (time.time() - self.start_time) <= self.recording_time:
                 audio_sample = msg.data
                 self.stt_presampler.extend_audio(audio_sample)
-                print(f"{audio_sample}")
+                print(f"{self.stt_presampler.evaluate_pcm_is_spoken(audio_sample)}")
+                #print(f"{audio_sample}")
             else:
                 if not self.wav_was_saved:
                     self.stop_recording()
@@ -63,7 +63,10 @@ class SttPublisherNode(Node):
         self.wav_was_saved = True
         print(f"The FUCKER was saved at: {wav_file_path}")
         response = self.stt_modul.evaluate_wav(wav_file_path)
-        self.publish_once(response)
+        try:
+            self.publish_once(response)
+        except Exception as e:
+            self.get_logger().error(f"Error publishing data: {e}")
     	
 
 

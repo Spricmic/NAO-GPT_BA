@@ -19,7 +19,7 @@ class SttPresampler:
         self.CHANNELS = 1  # number of channels from where audio is streamed.
         self.CHUNK_SIZE = int(self.SAMPLE_RATE * self.FRAME_DURATION_MS / 1000) * self.SAMPLE_WITH
         self.SILENCE_DURATION = 1
-        self.audio_buffer = []  # buffer used to by VAD to determain if somebody is speaking
+        self.audio_buffer = []  # buffer used by VAD to determain if somebody is speaking
         self.DELEAT_OLD_WAV = True
         self.audio_data = []  # all audio gets saved here unitl it is terminated.
         self.is_recording = False
@@ -30,6 +30,7 @@ class SttPresampler:
         self.audio_data = []
         self.is_recording = True
 
+
     def stop_recording(self, filename):
         """
         stops the recording to the current .wav file
@@ -38,6 +39,7 @@ class SttPresampler:
         self.is_recording = False
         self.save_to_wav(filename)
 
+
     def extend_audio(self, data):
         """
         extends the current audio_data with the data recived from the /audio topic
@@ -45,6 +47,7 @@ class SttPresampler:
         """
         if self.is_recording:
             self.audio_data.extend(data)
+
 
     def save_to_wav(self, filename):
         with wave.open(filename, 'wb') as wf:
@@ -55,8 +58,21 @@ class SttPresampler:
             wf.writeframes(b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data]))
             print("stt_presampler: saved .wav file")
 
-    def is_spooken(self, buffer):
-        return self.vad.is_speech(buffer, self.SAMPLE_RATE)
+
+    def is_speaking(self, chunk):
+        return self.vad.is_speech(chunk, self.SAMPLE_RATE)
+
+
+    def evaluate_pcm_is_spoken(self, pcm_msg):
+        self.audio_buffer.extend(pcm_msg)
+        chunk_bytes = array.array('h', pcm_msg).tobytes()
+
+        while len(chunk_bytes) >= self.CHUNK_SIZE:
+            chunk = chunk_bytes[:self.CHUNK_SIZE]
+            if self.is_speaking(chunk):
+                return True
+            else:
+                return False
 
 
     def add_buffer_to_wav(self, buffer):
