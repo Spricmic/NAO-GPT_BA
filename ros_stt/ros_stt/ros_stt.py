@@ -17,10 +17,10 @@ class SttPublisherNode(Node):
         self.text_publisher = self.create_publisher(String, '/prompt_gpt', 10)
         self.stt_presampler = SttPresampler()  # create a presampler instance.
         self.stt_modul = SttAzureInterface()  # creat a STT Interface instance.
-        self.recording_time = 5  # debugging time to record a wave fiel
-        self.get_logger().info("stt node initalized succesfully.")
+        self.recording_time = 5  # debugging time to record a .wav file
         self.start_time = time.time()
         self.wav_was_saved = False
+        self.get_logger().info("stt node initalized succesfully.")
         self.start_recording()
         
 
@@ -42,7 +42,7 @@ class SttPublisherNode(Node):
             else:
                 if not self.wav_was_saved:
                     self.stop_recording()
-                    self.wav_was_saved = True
+                    
                 else:
                     pass
 
@@ -60,13 +60,14 @@ class SttPublisherNode(Node):
         wav_file_path = os.path.join(script_dir, 'output.wav')
         print("saving file MOTHERFUCKER!!!")
         self.stt_presampler.stop_recording(wav_file_path)
+        self.wav_was_saved = True
         print(f"The FUCKER was saved at: {wav_file_path}")
-        self.stt_modul.evaluate_wav(wav_file_path)
+        response = self.stt_modul.evaluate_wav(wav_file_path)
+        self.publish_once(response)
     	
 
 
-def main(args=None):  
-    print("hey this is a test")
+def main(args=None):
     rclpy.init(args=args)
     stt_node = SttPublisherNode()  # create the publisher class and populate the text
     

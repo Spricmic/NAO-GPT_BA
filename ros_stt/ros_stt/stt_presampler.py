@@ -52,7 +52,7 @@ class SttPresampler:
 
 
     def add_buffer_to_wav(self, buffer):
-        if self.is_recording:
+        if self.is_spooken(buffer):
             self.audio_data.append(buffer)
 
 
