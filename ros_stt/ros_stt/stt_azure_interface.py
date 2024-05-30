@@ -34,7 +34,7 @@ class SttAzureInterface:
         :param wav_file: Name or Path to the wav_file to transcribe.
         :return: The response from SpeechServices.
         """
-        print("evl wav was called.")  #debugging statement
+        #print("evl wav was called.")  #debugging statement
         #print(f"{self.speechsdk_key} {self.speechsdk_region}")
         self.audio_config = speechsdk.AudioConfig(filename=str(wav_file))
         self.speech_recognizer = speechsdk.SpeechRecognizer(speech_config=self.speech_config,

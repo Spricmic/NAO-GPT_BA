@@ -1,7 +1,7 @@
 import webrtcvad
-import time
-import os
 import wave
+import array
+import numpy as np
 
 
 class SttPresampler:
@@ -31,10 +31,18 @@ class SttPresampler:
         self.is_recording = True
 
     def stop_recording(self, filename):
+        """
+        stops the recording to the current .wav file
+        :param filename: the absoulut location where the .wav file should be stored
+        """
         self.is_recording = False
         self.save_to_wav(filename)
 
     def extend_audio(self, data):
+        """
+        extends the current audio_data with the data recived from the /audio topic
+        :param data: the pcm data recived from /audio stream 
+        """
         if self.is_recording:
             self.audio_data.extend(data)
 
@@ -43,7 +51,7 @@ class SttPresampler:
             wf.setnchannels(self.CHANNELS)
             wf.setsampwidth(self.SAMPLE_WITH)
             wf.setframerate(self.SAMPLE_RATE)
-            print(f"trying to save: {b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data])}")
+            # print(f"trying to save: {b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data])}")
             wf.writeframes(b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data]))
             print("stt_presampler: saved .wav file")
 
