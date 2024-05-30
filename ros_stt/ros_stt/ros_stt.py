@@ -1,8 +1,8 @@
 import rclpy
 import os
 import time
+from threading import Timer, Thread
 from std_msgs.msg import String
-from std_msgs.msg import Int16MultiArray
 from naoqi_bridge_msgs.msg import AudioBuffer
 from rclpy.node import Node
 from .stt_azure_interface import SttAzureInterface
@@ -17,9 +17,11 @@ class SttPublisherNode(Node):
         self.text_publisher = self.create_publisher(String, '/prompt_gpt', 10)
         self.stt_presampler = SttPresampler()  # create a presampler instance.
         self.stt_modul = SttAzureInterface()  # creat a STT Interface instance.
-        self.stt_node = Node('stt_node')
-        self.recording_time = 10  # debugging time to record a wave fiel
+        self.recording_time = 5  # debugging time to record a wave fiel
         self.get_logger().info("stt node initalized succesfully.")
+        self.start_time = time.time()
+        self.wav_was_saved = False
+        self.start_recording()
         
 
     def publish_once(self, response):
@@ -32,15 +34,26 @@ class SttPublisherNode(Node):
         
 
     def audio_callback(self, msg):
-        audio_sample = msg.data
-        self.stt_presampler.extend_audio(audio_sample)
+        try:
+            if (time.time() - self.start_time) <= 5:
+                audio_sample = msg.data
+                self.stt_presampler.extend_audio(audio_sample)
+                print(f"{audio_sample}")
+            else:
+                if not self.wav_was_saved:
+                    self.stop_recording()
+                    self.wav_was_saved = True
+                else:
+                    pass
+
+        except Exception as e:
+            self.get_logger().error(f"Error in audio_callback: {e}")
 
 
     def start_recording(self):
+        self.get_logger().info("start recording")
         self.stt_presampler.start_recording()
-        time.sleep(self.recording_time)
-        self.stop_recording()
-
+        
 
     def stop_recording(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -49,15 +62,17 @@ class SttPublisherNode(Node):
         self.stt_presampler.stop_recording(wav_file_path)
         print(f"The FUCKER was saved at: {wav_file_path}")
         self.stt_modul.evaluate_wav(wav_file_path)
-
+    	
 
 
 def main(args=None):  
+    print("hey this is a test")
     rclpy.init(args=args)
     stt_node = SttPublisherNode()  # create the publisher class and populate the text
     
-    stt_node.start_recording()
     rclpy.spin(stt_node)
+    
+
 
 
     #cleanup
