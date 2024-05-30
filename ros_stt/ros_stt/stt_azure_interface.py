@@ -35,6 +35,7 @@ class SttAzureInterface:
         :return: The response from SpeechServices.
         """
         print("evl wav was called.")  #debugging statement
+        #print(f"{self.speechsdk_key} {self.speechsdk_region}")
         self.audio_config = speechsdk.AudioConfig(filename=str(wav_file))
         self.speech_recognizer = speechsdk.SpeechRecognizer(speech_config=self.speech_config,
                                                             audio_config=self.audio_config)
@@ -60,9 +61,9 @@ class SttAzureInterface:
 def main():
     # this section is only for testing purposes. The call to this class needs to be made from ros_stt.py
     stt = SttAzureInterface()
-    print(stt.evaluate_wav("C:/Users/michi/Documents/BALocal/BA_GIT/NAO-GPT_BA/ros_stt/ros_stt/test1.wav"))
+    print(stt.evaluate_wav("/home/nao/NAO_WS/src/ros_stt/ros_stt/test1.wav"))
     input("Press Enter to continue...")
-    print(stt.evaluate_wav("C:/Users/michi/Documents/BALocal/BA_GIT/NAO-GPT_BA/ros_stt/ros_stt/test2.wav"))
+    print(stt.evaluate_wav("/home/nao/NAO_WS/src/ros_stt/ros_stt/test2.wav"))
     
 
 

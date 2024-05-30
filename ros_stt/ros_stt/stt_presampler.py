@@ -56,9 +56,6 @@ class SttPresampler:
             self.audio_data.append(buffer)
 
 
-    
-
-
 def main():
     # this section is only for testing purposes. The call to this class needs to be made from ros_stt.py
     pass
