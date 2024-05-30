@@ -15,7 +15,7 @@ class SttPresampler:
     def __init__(self):
         self.FRAME_DURATION_MS = 30  # duration of one sample passed to VAD to determain if somebody is speaking. 
         self.SAMPLE_RATE = 16000  # rate at which the sudio is sampled.
-        self.SAMPLE_WITH = 2  #  
+        self.SAMPLE_WITH = 2  # sample with in bytes
         self.CHANNELS = 1  # number of channels from where audio is streamed.
         self.CHUNK_SIZE = int(self.SAMPLE_RATE * self.FRAME_DURATION_MS / 1000) * self.SAMPLE_WITH
         self.SILENCE_DURATION = 1
@@ -40,10 +40,11 @@ class SttPresampler:
 
     def save_to_wav(self, filename):
         with wave.open(filename, 'wb') as wf:
-            wf.setnchannels(1)
-            wf.setsampwidth(8)
-            wf.setframerate(16000)
-            wf.writeframes(b''.join([int(x).to_bytes(2, byteorder='little', signed=True) for x in self.audio_data]))
+            wf.setnchannels(self.CHANNELS)
+            wf.setsampwidth(self.SAMPLE_WITH)
+            wf.setframerate(self.SAMPLE_RATE)
+            print(f"trying to save: {b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data])}")
+            wf.writeframes(b''.join([int(x).to_bytes(self.SAMPLE_WITH, byteorder='little', signed=True) for x in self.audio_data]))
             print("stt_presampler: saved .wav file")
 
     def is_spooken(self, buffer):

@@ -17,6 +17,7 @@ class SttPublisherNode(Node):
         self.text_publisher = self.create_publisher(String, '/prompt_gpt', 10)
         self.stt_presampler = SttPresampler()  # create a presampler instance.
         self.stt_modul = SttAzureInterface()  # creat a STT Interface instance.
+        self.stt_node = Node('stt_node')
         self.recording_time = 10  # debugging time to record a wave fiel
         self.get_logger().info("stt node initalized succesfully.")
         
@@ -56,7 +57,7 @@ def main(args=None):
     stt_node = SttPublisherNode()  # create the publisher class and populate the text
     
     stt_node.start_recording()
-
+    rclpy.spin(stt_node)
 
 
     #cleanup
