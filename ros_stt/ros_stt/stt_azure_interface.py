@@ -34,13 +34,14 @@ class SttAzureInterface:
         :param wav_file: Name or Path to the wav_file to transcribe.
         :return: The response from SpeechServices.
         """
+        print("eavl wav was called.")  #debugging statemtn
         self.audio_config = speechsdk.AudioConfig(filename=str(wav_file))
         self.speech_recognizer = speechsdk.SpeechRecognizer(speech_config=self.speech_config,
                                                             audio_config=self.audio_config)
         self.result = self.speech_recognizer.recognize_once_async().get()
 
         if self.result.reason == speechsdk.ResultReason.RecognizedSpeech:
-            #print("Recognized: {}".format(self.result.text))
+            print("Recognized: {}".format(self.result.text))
             return str(self.result.text)
         elif self.result.reason == speechsdk.ResultReason.NoMatch:
             print("No speech could be recognized: {}".format(self.result.no_match_details))

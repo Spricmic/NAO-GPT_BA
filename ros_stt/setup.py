@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+from glob import glob
+import os
 
 package_name = 'ros_stt'
 
@@ -10,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('lib/python3.10/site-packages', package_name), glob('temp_storage/*.wav')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

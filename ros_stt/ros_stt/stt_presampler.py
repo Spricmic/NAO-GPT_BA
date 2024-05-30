@@ -21,20 +21,41 @@ class SttPresampler:
         self.SILENCE_DURATION = 1
         self.audio_buffer = []  # buffer used to by VAD to determain if somebody is speaking
         self.DELEAT_OLD_WAV = True
-        self.wav_file = []  # all audio gets saved here unitl it is terminated.
+        self.audio_data = []  # all audio gets saved here unitl it is terminated.
+        self.is_recording = False
         self.vad = webrtcvad.Vad(1)
 
+
+    def start_recording(self):
+        self.audio_data = []
+        self.is_recording = True
+
+    def stop_recording(self, filename):
+        self.is_recording = False
+        self.save_to_wav(filename)
+
+    def extend_audio(self, data):
+        if self.is_recording:
+            self.audio_data.extend(data)
+
+    def save_to_wav(self, filename):
+        with wave.open(filename, 'wb') as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(8)
+            wf.setframerate(16000)
+            wf.writeframes(b''.join([int(x).to_bytes(2, byteorder='little', signed=True) for x in self.audio_data]))
+            print("stt_presampler: saved .wav file")
 
     def is_spooken(self, buffer):
         return self.vad.is_speech(buffer, self.SAMPLE_RATE)
 
 
     def add_buffer_to_wav(self, buffer):
-        self.wav_file.append(buffer)
+        if self.is_recording:
+            self.audio_data.append(buffer)
 
 
-    def reset_wav(self):
-        self.wav_file = []
+    
 
 
 def main():
