@@ -23,7 +23,7 @@ class SttPresampler:
         self.DELEAT_OLD_WAV = True
         self.audio_data = []  # all audio gets saved here unitl it is terminated.
         self.is_recording = False
-        self.vad = webrtcvad.Vad(0)
+        self.vad = webrtcvad.Vad(1)
 
 
     def start_recording(self):
