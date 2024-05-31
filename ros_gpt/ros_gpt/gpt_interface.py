@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 class GPT_Interface:
     def __init__(self):
         # Constants
-        self.MAX_RESPONS_TOKENS = 250
         self.TOKEN_LIMIT = 4096
         self.DEPLOYMENT_NAME = "NAO4"
         self.WORDS_TO_TOKENS_MULTIPLIER = 1.3

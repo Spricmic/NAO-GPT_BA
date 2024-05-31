@@ -19,6 +19,7 @@ class SttPublisherNode(Node):
         self.last_speech_time = None  # saves the time when the last spooken utterance was detected.
         self.start_time = time.time()
         self.wav_was_saved = False
+        self.recording_time = 65
         self.get_logger().info("stt node initalized succesfully.")
         self.start_recording()
         
@@ -37,7 +38,7 @@ class SttPublisherNode(Node):
             if (time.time() - self.start_time) <= self.recording_time:
                 audio_sample = msg.data
                 self.stt_presampler.extend_audio(audio_sample)
-                print(f"{self.stt_presampler.evaluate_pcm_is_spoken(audio_sample)}")
+                self.publish_once(str(self.stt_presampler.evaluate_pcm_is_spoken(audio_sample)))
                 #print(f"{audio_sample}")
             else:
                 if not self.wav_was_saved:
@@ -51,6 +52,9 @@ class SttPublisherNode(Node):
 
 
     def start_recording(self):
+        for i in range(3,0,-1):  # this is a countdown for testing purposes.
+            print(i)
+            time.sleep(1)
         self.get_logger().info("start recording")
         self.stt_presampler.start_recording()
         
