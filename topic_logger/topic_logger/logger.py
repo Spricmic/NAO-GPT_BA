@@ -3,9 +3,9 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import time
 
-class GPTListener(Node):
+class TopicLogger(Node):
     def __init__(self):
-        super().__init__('gpt_listener')
+        super().__init__('topic_logger')
         self.subscription = self.create_subscription(
             String,
             'prompt_gpt',
@@ -25,7 +25,7 @@ class GPTListener(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = GPTListener()
+    node = TopicLogger()
     rclpy.spin(node)
 
     # Destroy the node explicitly

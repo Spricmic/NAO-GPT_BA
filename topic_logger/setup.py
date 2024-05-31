@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'listner = topic_logger.logger:main'
+            'logger = topic_logger.logger:main'
         ],
     },
 )
