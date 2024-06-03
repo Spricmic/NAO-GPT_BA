@@ -19,7 +19,7 @@ class SttPresampler:
         self.CHANNELS = 1  # number of channels from where audio is streamed.
         self.CHUNK_SIZE = int(self.SAMPLE_RATE * self.FRAME_DURATION_MS / 1000) * self.SAMPLE_WITH
         self.SILENCE_DURATION = 1
-        self.VAD_SETTING = 1  # setting for the Voice Activation Detection noise filtering (0-3) 0=None 3=very aggressiv
+        self.VAD_SETTING = 2  # setting for the Voice Activation Detection noise filtering (0-3) 0=None 3=very aggressiv
         self.audio_buffer = []  # buffer used by VAD to determain if somebody is speaking
         self.DELEAT_OLD_WAV = True
         self.audio_data = []  # all audio gets saved here unitl it is terminated.
