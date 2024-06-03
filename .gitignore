@@ -5,3 +5,4 @@ naoqi_libqicore/
 nao_meshes/
 pepper_meshes/
 .env
+temp_storage/
