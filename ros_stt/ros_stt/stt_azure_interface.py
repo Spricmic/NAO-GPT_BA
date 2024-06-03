@@ -61,9 +61,30 @@ class SttAzureInterface:
 def main():
     # this section is only for testing purposes. The call to this class needs to be made from ros_stt.py
     stt = SttAzureInterface()
-    print(stt.evaluate_wav("/home/nao/NAO_WS/src/ros_stt/ros_stt/test1.wav"))
-    input("Press Enter to continue...")
-    print(stt.evaluate_wav("/home/nao/NAO_WS/src/ros_stt/ros_stt/test2.wav"))
+    log_file = 'transcription_log.csv'
+    
+    with open(log_file, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Filename", "Response Duration (seconds)", "Transcribed Text"])
+        
+        while True:
+            wav_file =str("/home/nao/NAO_WS/temp_storage/") + input("Enter the path to the .wav file (or 'q' to quit): ")
+            if wav_file.lower() == 'q':
+                break
+            
+            if not os.path.isfile(wav_file):
+                print(f"The file {wav_file} does not exist.")
+                continue
+            
+            start_time = time.time()
+            transcribed_text = stt.evaluate_wav(wav_file)
+            end_time = time.time()
+            response_duration = end_time - start_time
+            
+            writer.writerow([wav_file, response_duration, transcribed_text])
+            print(f"Logged transcription for {wav_file}")
+    
+    print(f"Transcriptions logged in {log_file}")
     
 
 
