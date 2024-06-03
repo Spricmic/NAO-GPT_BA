@@ -96,7 +96,7 @@ class GPT_Interface:
     
 
 def main():
-    # This sectino is only for testing and debugging purposes.
+    # This sectino is only for testing and debugging purposes. call for ROS_GPT node needs to be made in ros_gpt.py
     gpt = GPT_Interface()
 
     while True:

@@ -1,5 +1,7 @@
 import azure.cognitiveservices.speech as speechsdk
 import os
+import csv
+import time
 from dotenv import load_dotenv
 
 
@@ -68,16 +70,17 @@ def main():
         writer.writerow(["Filename", "Response Duration (seconds)", "Transcribed Text"])
         
         while True:
-            wav_file =str("/home/nao/NAO_WS/temp_storage/") + input("Enter the path to the .wav file (or 'q' to quit): ")
+            wav_file = input("Enter the path to the .wav file (or 'q' to quit): ") 
+            full_path = str("/home/nao/NAO_WS/src/temp_storage/") + wav_file + str(".wav")
             if wav_file.lower() == 'q':
                 break
             
-            if not os.path.isfile(wav_file):
+            if not os.path.isfile(full_path):
                 print(f"The file {wav_file} does not exist.")
                 continue
             
             start_time = time.time()
-            transcribed_text = stt.evaluate_wav(wav_file)
+            transcribed_text = stt.evaluate_wav(full_path)
             end_time = time.time()
             response_duration = end_time - start_time
             
