@@ -11,4 +11,8 @@
         "name": "link_fingers",
         "description": "linking fingers in front of the torso to display patience."
     },
+    {
+        "name": "lean_forward",
+        "description": "With torso leaning forward in order to show interest."
+    }
 ]
