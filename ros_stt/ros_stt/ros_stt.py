@@ -34,6 +34,8 @@ class SttPublisherNode(Node):
         
 
     def audio_callback(self, msg):
+        pass
+        """
         try:
             if (time.time() - self.start_time) <= self.recording_time:
                 audio_sample = msg.data
@@ -49,12 +51,10 @@ class SttPublisherNode(Node):
 
         except Exception as e:
             self.get_logger().error(f"Error in audio_callback: {e}")
+        """
 
 
     def start_recording(self):
-        for i in range(3,0,-1):  # this is a countdown for testing purposes.
-            print(i)
-            time.sleep(1)
         self.get_logger().info("start recording")
         self.stt_presampler.start_recording()
         
