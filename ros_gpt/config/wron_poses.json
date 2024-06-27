@@ -1,0 +1,14 @@
+[
+    {
+    "name": "hands_behinde_back",
+    "description": "Tucking both hands behind the back to signal alertness or general openness"
+    },
+    {
+        "name": "cross_arms",
+        "description": "Crossing arms to express a guarded stance or skepticism."
+    },
+    {
+        "name": "link_fingers",
+        "description": "linking fingers in front of the torso to display patience."
+    },
+]
